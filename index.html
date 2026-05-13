@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALENTE | Advocacia Não Convencional</title>
+    
+    <!-- Unique Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <button class="nav-toggle">
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="full-nav">
+        <div class="nav-menu">
+            <ul>
+                <li><a href="#home">MANIFESTO</a></li>
+                <li><a href="#about">PRÁTICA</a></li>
+                <li><a href="#expertise">DOMÍNIOS</a></li>
+                <li><a href="#contact">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero: Split Screen -->
+        <section id="home" class="hero">
+            <div class="hero-left">
+                <span class="hero-mono">ESTAB. 2009 / SÃO PAULO</span>
+                <h1 class="hero-title">VA<br>LEN<br>TE.</h1>
+            </div>
+            <div class="hero-right">
+                <p class="hero-description">Advocacia de alto impacto. Não somos um escritório, somos um bastião de estratégia para quem não aceita o comum.</p>
+                <div class="hero-mono" style="margin-top: 4rem; opacity: 0.5;">
+                    SCROLL TO EXPLORE ↓
+                </div>
+            </div>
+        </section>
+
+        <!-- Manifesto / About -->
+        <section id="about" class="section-frame">
+            <span class="section-number">01 / MANIFESTO</span>
+            <div class="editorial-grid">
+                <div class="editorial-text">
+                    <h2 class="editorial-title">Direito é Arma, não apenas Papel.</h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 2rem;">No mundo de Arthur Valente, a lei não é um labirinto, é um tabuleiro. Cada vírgula é uma jogada, cada parágrafo um movimento calculado.</p>
+                    <p style="opacity: 0.7;">Operamos na intersecção entre o rigor jurídico absoluto e a audácia estratégica. Protegemos ativos, resolvemos crises e definimos o futuro dos nossos clientes com precisão cirúrgica.</p>
+                </div>
+                <div class="editorial-image">
+                    <!-- Pure CSS/SVG unique decorative element -->
+                    <svg viewBox="0 0 100 100" style="position: absolute; width: 100%; height: 100%; opacity: 0.05;">
+                        <line x1="0" y1="0" x2="100" y2="100" stroke="black" stroke-width="0.1"/>
+                        <line x1="100" y1="0" x2="0" y2="100" stroke="black" stroke-width="0.1"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expertise: Interactive List -->
+        <section id="expertise" class="section-frame">
+            <span class="section-number">02 / DOMÍNIOS</span>
+            <div class="expertise-list">
+                <div class="expertise-item">
+                    <span class="exp-num">01</span>
+                    <h3 class="exp-title">CORPORATIVO</h3>
+                    <p class="exp-desc">Fusões, aquisições e arquitetura societária agressiva.</p>
+                    <span class="exp-arrow">→</span>
+                </div>
+                <div class="expertise-item">
+                    <span class="exp-num">02</span>
+                    <h3 class="exp-title">LITÍGIO</h3>
+                    <p class="exp-desc">Disputas que exigem inteligência acima da força bruta.</p>
+                    <span class="exp-arrow">→</span>
+                </div>
+                <div class="expertise-item">
+                    <span class="exp-num">03</span>
+                    <h3 class="exp-title">PATRIMÔNIO</h3>
+                    <p class="exp-desc">Proteção de legados e sucessão internacional.</p>
+                    <span class="exp-arrow">→</span>
+                </div>
+                <div class="expertise-item">
+                    <span class="exp-num">04</span>
+                    <h3 class="exp-title">TECH/IP</h3>
+                    <p class="exp-desc">Onde a inovação encontra a segurança jurídica.</p>
+                    <span class="exp-arrow">→</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact: High Impact -->
+        <section id="contact">
+            <div class="contact-hero">
+                <h2 class="contact-title">FALE<br>CONOSCO.</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-form">
+                    <form id="valenteForm">
+                        <input type="text" placeholder="SEU NOME" required>
+                        <input type="email" placeholder="EMAIL CORPORATIVO" required>
+                        <textarea placeholder="DESCREVA O DESAFIO" rows="4" required></textarea>
+                        <button type="submit" class="submit-btn">
+                            SOLICITAR ANÁLISE <span>→</span>
+                        </button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div>
+                        <span class="section-number" style="margin-bottom: 1rem;">LOCAL</span>
+                        <p style="font-family: var(--font-heading); font-size: 2rem;">AV. PAULISTA, 2000<br>SÃO PAULO, BRASIL</p>
+                    </div>
+                    <div style="margin-top: 4rem;">
+                        <span class="section-number" style="margin-bottom: 1rem;">CONECTE</span>
+                        <p style="font-family: var(--font-mono);">IN / LI / TW</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="padding: 50px; background: var(--color-ink); color: var(--color-paper); display: flex; justify-content: space-between; align-items: center;">
+        <span class="hero-mono" style="font-size: 0.7rem;">© VALENTE LAW 2024</span>
+        <span class="hero-mono" style="font-size: 0.7rem;">BEYOND THE LAW</span>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
