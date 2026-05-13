@@ -22,17 +22,7 @@
                     colors: {
                         zinc: { 950: '#09090b' }
                     },
-                    borderRadius: { '2.5xl': '2.5rem' },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
-                    }
+                    borderRadius: { '2.5xl': '2.5rem' }
                 }
             }
         }
@@ -61,6 +51,27 @@
             @apply bg-zinc-950 text-zinc-100 selection:bg-zinc-100 selection:text-zinc-950;
         }
 
+        /* Fixed Mobile Menu Overlay */
+        #mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: #09090b;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            padding: 2.5rem;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #mobile-menu-overlay.is-active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         .mesh-bg {
             position: fixed;
             top: 0;
@@ -72,33 +83,17 @@
             opacity: 0.3;
             pointer-events: none;
         }
-
-        .blob {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(39, 39, 42, 0.3) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(80px);
-        }
-
-        /* Mobile Menu State */
-        #mobile-menu-overlay.open {
-            transform: translateY(0);
-            opacity: 1;
-        }
     </style>
 </head>
 <body class="antialiased">
     <div class="mesh-bg">
-        <div class="blob animate-float top-[-10%] left-[-10%]"></div>
-        <div class="blob animate-float top-[60%] right-[-10%]" style="animation-delay: -2s;"></div>
+        <div class="blob absolute w-[600px] h-[600px] bg-zinc-900/30 blur-[100px] rounded-full top-[-10%] left-[-10%]"></div>
     </div>
 
-    <header class="fixed top-0 left-0 w-full z-[100] py-6 transition-all duration-500" id="main-header">
+    <header class="fixed top-0 left-0 w-full z-[1000] py-6 transition-all duration-500" id="main-header">
         <nav class="max-w-[1400px] mx-auto px-6 md:px-8 flex justify-between items-center">
-            <div class="logo font-bold text-xl md:text-2xl tracking-tighter flex items-center gap-2 group cursor-pointer">
-                <div class="w-8 h-8 md:w-10 md:h-10 bg-white text-zinc-950 rounded-lg md:rounded-xl flex items-center justify-center transition-transform group-hover:rotate-[15deg]">
+            <div class="logo font-bold text-xl md:text-2xl tracking-tighter flex items-center gap-2">
+                <div class="w-8 h-8 md:w-10 md:h-10 bg-white text-zinc-950 rounded-lg md:rounded-xl flex items-center justify-center">
                     <i class="ph ph-scales font-bold text-sm md:text-base"></i>
                 </div>
                 VALENTE<span class="text-zinc-500 font-normal">.ADV</span>
@@ -106,45 +101,45 @@
             
             <!-- Desktop Links -->
             <div class="hidden lg:flex gap-10 items-center text-sm font-semibold tracking-wide">
-                <a href="#expertise" class="text-zinc-400 hover:text-white transition-colors relative group">Expertise</a>
-                <a href="#metodo" class="text-zinc-400 hover:text-white transition-colors relative group">Metodologia</a>
-                <a href="#about" class="text-zinc-400 hover:text-white transition-colors relative group">Escritório</a>
+                <a href="#expertise" class="text-zinc-400 hover:text-white transition-colors">Expertise</a>
+                <a href="#metodo" class="text-zinc-400 hover:text-white transition-colors">Metodologia</a>
+                <a href="#about" class="text-zinc-400 hover:text-white transition-colors">Escritório</a>
                 <a href="#contact" class="px-8 py-3 bg-white text-zinc-950 rounded-full font-bold hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                     Consultoria Privada
                 </a>
             </div>
 
             <!-- Mobile Menu Toggle -->
-            <button class="lg:hidden w-10 h-10 flex items-center justify-center bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-100 text-xl focus:outline-none z-[110]" id="mobile-menu-toggle" aria-label="Toggle Menu">
+            <button class="lg:hidden w-10 h-10 flex items-center justify-center bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-100 text-xl focus:outline-none" id="mobile-menu-toggle">
                 <i class="ph ph-list" id="menu-icon-toggle"></i>
             </button>
         </nav>
+    </header>
 
-        <!-- Mobile Menu Overlay - Solid Background & High Z-Index -->
-        <div class="fixed inset-0 bg-zinc-950 z-[105] flex flex-col p-10 transition-all duration-500 translate-y-full opacity-0 overflow-y-auto" id="mobile-menu-overlay">
-            <div class="mt-20 flex flex-col gap-8 text-4xl font-bold tracking-tighter">
-                <a href="#expertise" class="mobile-nav-link text-zinc-100 hover:text-zinc-400 transition-colors">Expertise</a>
-                <a href="#metodo" class="mobile-nav-link text-zinc-100 hover:text-zinc-400 transition-colors">Metodologia</a>
-                <a href="#about" class="mobile-nav-link text-zinc-100 hover:text-zinc-400 transition-colors">Escritório</a>
-                <a href="#contact" class="mobile-nav-link text-zinc-100 hover:text-zinc-400 transition-colors">Contato</a>
-            </div>
-            <div class="mt-12 border-t border-zinc-900 pt-10">
-                <p class="text-zinc-500 font-mono text-[10px] uppercase tracking-[0.3em] mb-6">São Paulo / Global</p>
-                <div class="flex flex-col gap-4 text-xl font-semibold">
-                    <a href="tel:+551140049000" class="text-zinc-100">+55 (11) 4004-9000</a>
-                    <a href="mailto:contato@valente.adv.br" class="text-zinc-500">contato@valente.adv.br</a>
-                </div>
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay">
+        <div class="mt-20 flex flex-col gap-8 text-4xl font-bold tracking-tighter">
+            <a href="#expertise" class="mobile-nav-link text-zinc-100">Expertise</a>
+            <a href="#metodo" class="mobile-nav-link text-zinc-100">Metodologia</a>
+            <a href="#about" class="mobile-nav-link text-zinc-100">Escritório</a>
+            <a href="#contact" class="mobile-nav-link text-zinc-100">Contato</a>
+        </div>
+        <div class="mt-auto border-t border-zinc-900 pt-10 pb-10">
+            <p class="text-zinc-500 font-mono text-[10px] uppercase tracking-[0.3em] mb-6">São Paulo / Global</p>
+            <div class="flex flex-col gap-4 text-xl font-semibold">
+                <a href="tel:+551140049000" class="text-zinc-100">+55 (11) 4004-9000</a>
+                <a href="mailto:contato@valente.adv.br" class="text-zinc-500">contato@valente.adv.br</a>
             </div>
         </div>
-    </header>
+    </div>
 
     <main>
         <!-- Hero -->
-        <section id="hero" class="max-w-[1400px] mx-auto px-6 md:px-8 min-h-[100dvh] flex flex-col justify-center py-20 relative">
+        <section id="hero" class="max-w-[1400px] mx-auto px-6 md:px-8 min-h-[100dvh] flex flex-col justify-center py-20">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
                 <div class="lg:col-span-7 reveal visible">
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-zinc-500 tracking-widest uppercase mb-8">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                         Disponibilidade: Q2 2024
                     </div>
                     <h1 class="text-5xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-[0.85] mb-10 text-gradient">
@@ -154,7 +149,7 @@
                         Engenharia jurídica de precisão para desafios que definem o futuro de grandes legados.
                     </p>
                     <div class="flex flex-wrap gap-6 items-center">
-                        <a href="#contact" class="px-8 py-4 bg-white text-zinc-950 rounded-xl font-bold hover:scale-105 transition-all text-lg shadow-xl">
+                        <a href="#contact" class="px-8 py-4 bg-white text-zinc-950 rounded-xl font-bold hover:scale-105 active:scale-95 transition-all text-lg shadow-xl">
                             Iniciar Análise
                         </a>
                         <a href="#expertise" class="group flex items-center gap-3 text-xs font-bold tracking-widest uppercase text-zinc-500 hover:text-white transition-colors">
@@ -167,12 +162,8 @@
                 </div>
                 <div class="hidden lg:block lg:col-span-5 relative reveal visible stagger-2">
                     <div class="aspect-[3/4] rounded-2.5xl glass overflow-hidden relative group">
-                        <img src="https://picsum.photos/seed/legal-p/1200/1600" alt="Legal Mastery" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 transition-all duration-1000">
+                        <img src="https://picsum.photos/seed/legal-elite/1200/1600" alt="Mastery" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 transition-all duration-1000">
                         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
-                        <div class="absolute inset-x-8 bottom-8 p-8 glass rounded-2xl">
-                            <h4 class="font-bold text-xl mb-2 text-zinc-100">Discrição Absoluta</h4>
-                            <p class="text-sm text-zinc-400 leading-relaxed">Sigilo absoluto e proteção integral de ativos sensíveis.</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -180,115 +171,31 @@
 
         <!-- Expertise -->
         <section id="expertise" class="max-w-[1400px] mx-auto px-6 md:px-8 py-24 md:py-40 border-t border-zinc-900">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 gap-10">
-                <div class="reveal">
-                    <h2 class="text-4xl md:text-6xl font-bold tracking-tighter mb-4">Domínios de Prática</h2>
-                    <p class="text-zinc-500 text-lg md:text-xl max-w-md">Especialidades fundadas em rigor técnico e visão tática.</p>
-                </div>
-                <div class="font-mono text-zinc-800 text-4xl md:text-6xl tracking-tighter opacity-20 hidden md:block">01 — 04</div>
-            </div>
-
+            <h2 class="text-4xl md:text-6xl font-bold tracking-tighter mb-16 md:mb-24 reveal">Domínios de Prática</h2>
             <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10">
                 <div class="md:col-span-8 group reveal">
-                    <div class="min-h-[350px] md:min-h-[500px] h-full glass rounded-2.5xl p-8 md:p-12 flex flex-col justify-between relative overflow-hidden transition-all hover:bg-zinc-900/60">
-                        <div class="flex justify-between items-start relative z-10">
-                            <div class="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-white text-zinc-950 flex items-center justify-center text-2xl md:text-3xl shadow-xl">
-                                <i class="ph ph-buildings"></i>
-                            </div>
-                            <div class="text-[10px] font-mono text-zinc-600 tracking-[0.3em] uppercase">Core</div>
-                        </div>
-                        <div class="relative z-10">
-                            <h3 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4">Arquitetura <br> Societária</h3>
-                            <p class="text-zinc-500 text-base md:text-lg max-w-md">Operações globais complexas com foco em eficiência e segurança.</p>
-                        </div>
-                        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-white/5 rounded-full blur-[80px]"></div>
+                    <div class="min-h-[350px] md:min-h-[500px] h-full glass rounded-2.5xl p-8 md:p-12 flex flex-col justify-between transition-all hover:bg-zinc-900/60">
+                        <i class="ph ph-buildings text-4xl md:text-5xl text-zinc-700"></i>
+                        <h3 class="text-3xl md:text-5xl font-bold tracking-tighter">Arquitetura <br> Societária</h3>
                     </div>
                 </div>
-
                 <div class="md:col-span-4 group reveal stagger-1">
-                    <div class="min-h-[350px] md:min-h-[500px] h-full bg-zinc-900 rounded-2.5xl border border-zinc-800 p-8 md:p-12 flex flex-col justify-between transition-all hover:border-zinc-500">
+                    <div class="min-h-[350px] md:min-h-[500px] h-full bg-zinc-900 rounded-2.5xl border border-zinc-800 p-8 md:p-12 flex flex-col justify-between">
                         <i class="ph ph-briefcase-metal text-4xl md:text-5xl text-zinc-700"></i>
-                        <div>
-                            <h3 class="text-3xl md:text-4xl font-bold tracking-tighter mb-4">Gestão <br> de Wealth</h3>
-                            <p class="text-zinc-500 text-sm md:text-base leading-relaxed">Proteção de legados e planejamento sucessório estratégico.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="md:col-span-5 group reveal stagger-2">
-                    <div class="min-h-[300px] md:min-h-[400px] h-full glass rounded-2.5xl p-8 md:p-12 flex flex-col justify-between transition-all hover:scale-[1.02]">
-                        <i class="ph ph-gavel text-4xl md:text-5xl text-zinc-700"></i>
-                        <h3 class="text-3xl md:text-4xl font-bold tracking-tighter">Litígios de <br> Complexidade</h3>
-                    </div>
-                </div>
-
-                <div class="md:col-span-7 group reveal stagger-3">
-                    <div class="min-h-[300px] md:min-h-[400px] h-full bg-white rounded-2.5xl p-8 md:p-12 flex flex-col justify-between text-zinc-950 shadow-2xl transition-all hover:scale-[0.98]">
-                        <div class="flex justify-between items-center">
-                            <i class="ph ph-fingerprint text-4xl md:text-5xl opacity-40"></i>
-                            <span class="px-3 py-1 bg-zinc-950 text-white rounded-full text-[8px] md:text-[10px] font-mono tracking-widest uppercase">Tech / IP</span>
-                        </div>
-                        <h3 class="text-3xl md:text-4xl font-bold tracking-tighter">Propriedade Intelectual <br> & Cyberlaw</h3>
+                        <h3 class="text-3xl md:text-4xl font-bold tracking-tighter">Gestão <br> de Wealth</h3>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Metodologia -->
-        <section id="metodo" class="max-w-[1400px] mx-auto px-6 md:px-8 py-24 md:py-40 border-t border-zinc-900">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-                <div class="lg:col-span-4 reveal">
-                    <span class="font-mono text-zinc-500 text-xs tracking-[0.4em] uppercase mb-4 block">O Método</span>
-                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter mb-6 leading-tight">Engenharia <br> Jurídica de <br> Precisão.</h2>
-                    <p class="text-zinc-500 text-base md:text-lg mb-8">Cada caso é uma arquitetura exclusiva.</p>
-                </div>
-                <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
-                    <div class="p-8 bg-zinc-900/50 rounded-2xl border border-zinc-800/50 reveal group hover:bg-zinc-900 transition-colors">
-                        <span class="text-3xl font-bold text-zinc-800 block mb-4">01</span>
-                        <h4 class="font-bold mb-2">Diagnóstico</h4>
-                        <p class="text-zinc-500 text-xs md:text-sm leading-relaxed">Mapeamento granular de riscos e identificação tática.</p>
-                    </div>
-                    <div class="p-8 bg-zinc-900/50 rounded-2xl border border-zinc-800/50 reveal stagger-1 group hover:bg-zinc-900 transition-colors">
-                        <span class="text-3xl font-bold text-zinc-800 block mb-4">02</span>
-                        <h4 class="font-bold mb-2">Arquitetura</h4>
-                        <p class="text-zinc-500 text-xs md:text-sm leading-relaxed">Modelagem de múltiplos cenários de defesa.</p>
-                    </div>
-                    <div class="p-8 bg-zinc-900/50 rounded-2xl border border-zinc-800/50 reveal stagger-2 group hover:bg-zinc-900 transition-colors">
-                        <span class="text-3xl font-bold text-zinc-800 block mb-4">03</span>
-                        <h4 class="font-bold mb-2">Execução</h4>
-                        <p class="text-zinc-500 text-xs md:text-sm leading-relaxed">Ação cirúrgica em cenários de alta pressão.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Form -->
+        <!-- Contact -->
         <section id="contact" class="max-w-[1400px] mx-auto px-6 md:px-8 py-24 md:py-40 border-t border-zinc-900">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 md:gap-32 items-start">
-                <div class="reveal">
-                    <h2 class="text-5xl md:text-7xl font-bold tracking-tighter mb-8 leading-none">Inicie a <br> <span class="text-zinc-600">Estratégia.</span></h2>
-                    <p class="text-zinc-500 text-lg md:text-xl mb-12 font-light leading-relaxed">Retorno em até 24 horas úteis.</p>
-                    
-                    <div class="space-y-8 md:space-y-12">
-                        <div class="flex items-center gap-6 md:gap-8 group">
-                            <div class="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:bg-white group-hover:text-zinc-950 transition-colors">
-                                <i class="ph ph-paper-plane-tilt text-xl md:text-2xl"></i>
-                            </div>
-                            <span class="text-lg md:text-2xl font-bold tracking-tight">contato@valente.adv.br</span>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+                <h2 class="text-5xl md:text-7xl font-bold tracking-tighter leading-none reveal">Inicie a <br> <span class="text-zinc-600">Estratégia.</span></h2>
                 <div class="glass p-8 md:p-16 rounded-2.5xl reveal">
                     <form id="valenteForm" class="space-y-10 md:space-y-12">
-                        <div class="space-y-2 md:space-y-4">
-                            <label class="text-[10px] font-mono text-zinc-600 uppercase tracking-[0.2em] block">Identificação</label>
-                            <input type="text" placeholder="Nome Completo" class="w-full bg-transparent border-b border-zinc-800 py-3 md:py-4 text-xl md:text-2xl outline-none focus:border-white transition-all placeholder:text-zinc-800 text-white font-medium" required>
-                        </div>
-                        <div class="space-y-2 md:space-y-4">
-                            <label class="text-[10px] font-mono text-zinc-600 uppercase tracking-[0.2em] block">Email Corporativo</label>
-                            <input type="email" placeholder="email@dominio.com.br" class="w-full bg-transparent border-b border-zinc-800 py-3 md:py-4 text-xl md:text-2xl outline-none focus:border-white transition-all placeholder:text-zinc-800 text-white font-medium" required>
-                        </div>
+                        <input type="text" placeholder="Nome Completo" class="w-full bg-transparent border-b border-zinc-800 py-3 md:py-4 text-xl md:text-2xl outline-none focus:border-white transition-all text-white" required>
+                        <input type="email" placeholder="Email Corporativo" class="w-full bg-transparent border-b border-zinc-800 py-3 md:py-4 text-xl md:text-2xl outline-none focus:border-white transition-all text-white" required>
                         <button type="submit" class="w-full py-6 md:py-8 bg-white text-zinc-950 font-bold text-lg md:text-xl rounded-xl md:rounded-2xl hover:scale-[0.98] active:scale-95 transition-all shadow-xl">
                             ENVIAR PROTOCOLO
                         </button>
@@ -297,21 +204,6 @@
             </div>
         </section>
     </main>
-
-    <footer class="py-20 md:py-32 border-t border-zinc-900">
-        <div class="max-w-[1400px] mx-auto px-6 md:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
-                <div class="logo font-bold text-2xl tracking-tighter">
-                    VALENTE<span class="text-zinc-500 font-normal">.ADV</span>
-                </div>
-                <div class="flex flex-wrap justify-center gap-8 text-zinc-700 text-[10px] font-mono uppercase tracking-[0.3em]">
-                    <a href="#" class="hover:text-white transition-colors">Privacidade</a>
-                    <a href="#" class="hover:text-white transition-colors">Termos</a>
-                    <span>OAB SP 123.456</span>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <script src="script.js"></script>
 </body>
