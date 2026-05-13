@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Custom Cursor with Mix-Blend-Mode
+    // Elegant Cursor Logic
     const cursor = document.querySelector('.cursor');
     const follower = document.querySelector('.cursor-follower');
-    
+    const links = document.querySelectorAll('a, button, input, textarea');
+
     let mouseX = 0, mouseY = 0;
     let followerX = 0, followerY = 0;
 
@@ -14,84 +15,64 @@ document.addEventListener('DOMContentLoaded', () => {
         cursor.style.top = mouseY + 'px';
     });
 
-    const animate = () => {
+    const animateCursor = () => {
         followerX += (mouseX - followerX) * 0.1;
         followerY += (mouseY - followerY) * 0.1;
         follower.style.left = followerX + 'px';
         follower.style.top = followerY + 'px';
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animateCursor);
     };
-    animate();
+    animateCursor();
 
-    // Full Screen Nav Toggle
-    const navToggle = document.querySelector('.nav-toggle');
-    const fullNav = document.querySelector('.full-nav');
-    const navLinks = document.querySelectorAll('.nav-menu a');
-
-    navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        fullNav.classList.toggle('active');
-        
-        if (fullNav.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            fullNav.classList.remove('active');
-            document.body.style.overflow = 'auto';
+    // Hover effects for the refined cursor
+    links.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            follower.style.transform = 'scale(1.5)';
+            follower.style.backgroundColor = 'rgba(184, 158, 117, 0.1)';
+            cursor.style.transform = 'scale(0)';
+        });
+        link.addEventListener('mouseleave', () => {
+            follower.style.transform = 'scale(1)';
+            follower.style.backgroundColor = 'transparent';
+            cursor.style.transform = 'scale(1)';
         });
     });
 
-    // Scroll Reveal Stagger Logic
-    const revealElements = document.querySelectorAll('.expertise-item, .editorial-text, .hero-title');
-    
-    const observerOptions = {
-        threshold: 0.1
-    };
-
+    // Intersection Observer for the "Luxury Reveal"
+    const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('active');
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
-    revealElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(50px)';
-        el.style.transition = 'all 1s cubic-bezier(0.77, 0, 0.175, 1)';
-        observer.observe(el);
-    });
+    reveals.forEach(r => observer.observe(r));
 
-    // Form Submission
-    const form = document.getElementById('valenteForm');
+    // Form Simulation
+    const form = document.getElementById('contactForm');
     if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            const btn = form.querySelector('.submit-btn');
-            btn.innerHTML = 'ENVIANDO... <span>→</span>';
+            const btn = form.querySelector('button');
+            btn.innerText = 'Processando...';
             
             setTimeout(() => {
-                btn.innerHTML = 'RECEBIDO. <span>✔</span>';
-                btn.style.background = '#0047FF';
+                btn.innerText = 'Solicitação Recebida';
+                btn.style.borderColor = '#B89E75';
+                btn.style.color = '#B89E75';
                 form.reset();
             }, 2000);
         });
     }
 
-    // Dynamic Text Skew on Scroll
+    // Parallax on Image Frame
     window.addEventListener('scroll', () => {
         const scrolled = window.scrollY;
-        const title = document.querySelector('.hero-title');
-        if (title) {
-            title.style.transform = `skewY(${scrolled * 0.01}deg)`;
+        const frame = document.querySelector('.image-frame div');
+        if (frame) {
+            frame.style.transform = `scale(${1 + scrolled * 0.0002}) translateY(${scrolled * 0.05}px)`;
         }
     });
 });
