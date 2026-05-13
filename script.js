@@ -1,23 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. MOBILE MENU LOGIC (FIXED REDIRECTS)
+    // 1. MOBILE MENU LOGIC (SIMPLIFIED & ROBUST)
     const mobileToggle = document.getElementById('mobile-menu-toggle');
     const mobileOverlay = document.getElementById('mobile-menu-overlay');
     const mobileLinks = document.querySelectorAll('.mobile-nav-link');
     const menuIcon = document.getElementById('menu-icon-toggle');
 
-    let isMenuOpen = false;
-
-    const toggleMenu = (forceClose = null) => {
-        isMenuOpen = forceClose !== null ? !forceClose : !isMenuOpen;
-        
-        if (isMenuOpen) {
-            mobileOverlay.classList.remove('translate-y-full', 'opacity-0');
-            mobileOverlay.classList.add('translate-y-0', 'opacity-100');
+    const toggleMenu = () => {
+        const isActive = mobileOverlay.classList.toggle('is-active');
+        if (isActive) {
             menuIcon.classList.replace('ph-list', 'ph-x');
             document.body.style.overflow = 'hidden';
         } else {
-            mobileOverlay.classList.add('translate-y-full', 'opacity-0');
-            mobileOverlay.classList.remove('translate-y-0', 'opacity-100');
             menuIcon.classList.replace('ph-x', 'ph-list');
             document.body.style.overflow = '';
         }
@@ -30,17 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Fixed Link Click logic for Mobile
     mobileLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('href');
             const target = document.querySelector(targetId);
             
-            // 1. Close Menu First
-            toggleMenu(true); 
+            // Close Menu
+            toggleMenu(); 
 
-            // 2. Scroll after a tiny delay to allow the menu to start closing
+            // Scroll
             if (target) {
                 setTimeout(() => {
                     const headerHeight = 80;
@@ -48,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         top: target.offsetTop - headerHeight,
                         behavior: 'smooth'
                     });
-                }, 100); 
+                }, 400); // Wait for transition
             }
         });
     });
