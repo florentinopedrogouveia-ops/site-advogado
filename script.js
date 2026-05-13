@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. MOBILE MENU LOGIC (ROBUST)
+    // 1. MOBILE MENU LOGIC (FIXED REDIRECTS)
     const mobileToggle = document.getElementById('mobile-menu-toggle');
     const mobileOverlay = document.getElementById('mobile-menu-overlay');
     const mobileLinks = document.querySelectorAll('.mobile-nav-link');
@@ -7,8 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isMenuOpen = false;
 
-    const toggleMenu = () => {
-        isMenuOpen = !isMenuOpen;
+    const toggleMenu = (forceClose = null) => {
+        isMenuOpen = forceClose !== null ? !forceClose : !isMenuOpen;
+        
         if (isMenuOpen) {
             mobileOverlay.classList.remove('translate-y-full', 'opacity-0');
             mobileOverlay.classList.add('translate-y-0', 'opacity-100');
@@ -29,16 +30,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Fixed Link Click logic for Mobile
     mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (isMenuOpen) toggleMenu();
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const target = document.querySelector(targetId);
+            
+            // 1. Close Menu First
+            toggleMenu(true); 
+
+            // 2. Scroll after a tiny delay to allow the menu to start closing
+            if (target) {
+                setTimeout(() => {
+                    const headerHeight = 80;
+                    window.scrollTo({
+                        top: target.offsetTop - headerHeight,
+                        behavior: 'smooth'
+                    });
+                }, 100); 
+            }
         });
     });
 
     // 2. HEADER SCROLL STATE
     const header = document.getElementById('main-header');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
+        if (window.scrollY > 80) {
             header.classList.add('bg-zinc-950/80', 'backdrop-blur-2xl', 'border-b', 'border-zinc-800/50', 'py-4');
             header.classList.remove('py-6');
         } else {
@@ -47,14 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 
-    // 3. REVEAL ORCHESTRATION (TASTE-SKILL RULE 69)
+    // 3. REVEAL ON SCROLL
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
                 setTimeout(() => {
                     entry.target.classList.add('visible');
-                }, index * 50);
+                }, index * 100);
                 observer.unobserve(entry.target);
             }
         });
@@ -62,14 +80,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     reveals.forEach(r => observer.observe(r));
 
-    // 4. FORM HANDLING (TACTILE FEEDBACK)
+    // 4. FORM HANDLING
     const form = document.getElementById('valenteForm');
     if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const btn = form.querySelector('button');
-            const original = btn.innerText;
-            btn.innerText = 'PROCESSANDO...';
+            btn.innerText = 'ENVIANDO...';
             btn.disabled = true;
 
             setTimeout(() => {
@@ -79,21 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 form.reset();
                 
                 setTimeout(() => {
-                    btn.innerText = original;
+                    btn.innerText = 'ENVIAR NOVO PROTOCOLO';
                     btn.classList.replace('bg-emerald-500', 'bg-white');
                     btn.classList.remove('text-white');
                     btn.disabled = false;
                 }, 3000);
-            }, 2000);
+            }, 1500);
         });
     }
-
-    // 5. PARALLAX & MICRO-PHYSICS (SUBTLE)
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        const heroText = document.querySelector('.text-gradient');
-        if (heroText) {
-            heroText.style.transform = `translateY(${scrolled * 0.15}px)`;
-        }
-    }, { passive: true });
 });
