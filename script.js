@@ -1,78 +1,95 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Elegant Cursor Logic
-    const cursor = document.querySelector('.cursor');
-    const follower = document.querySelector('.cursor-follower');
-    const links = document.querySelectorAll('a, button, input, textarea');
+    // 1. HEADER SCROLL STATE
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }, { passive: true });
 
-    let mouseX = 0, mouseY = 0;
-    let followerX = 0, followerY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        
-        cursor.style.left = mouseX + 'px';
-        cursor.style.top = mouseY + 'px';
-    });
-
-    const animateCursor = () => {
-        followerX += (mouseX - followerX) * 0.1;
-        followerY += (mouseY - followerY) * 0.1;
-        follower.style.left = followerX + 'px';
-        follower.style.top = followerY + 'px';
-        requestAnimationFrame(animateCursor);
+    // 2. REVEAL ORCHESTRATION (Taste-Skill Rule 69)
+    const revealElements = document.querySelectorAll('.reveal');
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
     };
-    animateCursor();
 
-    // Hover effects for the refined cursor
-    links.forEach(link => {
-        link.addEventListener('mouseenter', () => {
-            follower.style.transform = 'scale(1.5)';
-            follower.style.backgroundColor = 'rgba(184, 158, 117, 0.1)';
-            cursor.style.transform = 'scale(0)';
-        });
-        link.addEventListener('mouseleave', () => {
-            follower.style.transform = 'scale(1)';
-            follower.style.backgroundColor = 'transparent';
-            cursor.style.transform = 'scale(1)';
-        });
-    });
-
-    // Intersection Observer for the "Luxury Reveal"
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('active');
+                // Add a small staggered delay based on appearance order if needed
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 50); 
+                revealObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
+    }, observerOptions);
 
-    reveals.forEach(r => observer.observe(r));
+    revealElements.forEach(el => revealObserver.observe(el));
 
-    // Form Simulation
-    const form = document.getElementById('contactForm');
-    if (form) {
-        form.addEventListener('submit', (e) => {
+    // 3. SMOOTH NAVIGATION
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const btn = form.querySelector('button');
-            btn.innerText = 'Processando...';
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
             
+            const target = document.querySelector(targetId);
+            if (target) {
+                const headerHeight = header.offsetHeight;
+                window.scrollTo({
+                    top: target.offsetTop - headerHeight,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // 4. FORM HANDLING & TACTILE FEEDBACK (Taste-Skill Rule 58)
+    const form = document.getElementById('valenteForm');
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerText;
+            
+            // Loading State
+            submitBtn.innerText = 'PROCESSANDO...';
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+
+            // Simulate Network Delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // Success State
+            submitBtn.innerText = 'SOLICITAÇÃO ENVIADA';
+            submitBtn.style.backgroundColor = '#10b981'; // Emerald-500
+            submitBtn.style.color = '#ffffff';
+            
+            form.reset();
+
             setTimeout(() => {
-                btn.innerText = 'Solicitação Recebida';
-                btn.style.borderColor = '#B89E75';
-                btn.style.color = '#B89E75';
-                form.reset();
-            }, 2000);
+                submitBtn.innerText = originalText;
+                submitBtn.style.backgroundColor = '';
+                submitBtn.style.color = '';
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '';
+            }, 3000);
         });
     }
 
-    // Parallax on Image Frame
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        const frame = document.querySelector('.image-frame div');
-        if (frame) {
-            frame.style.transform = `scale(${1 + scrolled * 0.0002}) translateY(${scrolled * 0.05}px)`;
-        }
-    });
+    // 5. PARALLAX MICRO-PHYSICS (Taste-Skill Rule 154)
+    // Subtle movement on the hero image for a "premium" feel
+    const heroImage = document.querySelector('.group img');
+    if (heroImage) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            if (scrolled < window.innerHeight) {
+                heroImage.style.transform = `scale(1.05) translateY(${scrolled * 0.1}px)`;
+            }
+        }, { passive: true });
+    }
 });
