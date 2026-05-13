@@ -3,96 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VALENTE | Consultoria Jurídica de Luxo</title>
+    <title>VALENTE | Advocacia de Elite</title>
     
-    <!-- Premium Fonts -->
+    <!-- Taste-Skill Approved Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+<body class="bg-zinc-950 text-zinc-100 antialiased">
+    <!-- No Custom Cursor (Banned by Taste-Skill Rule 98) -->
 
-    <nav>
-        <div class="logo">VALENTE</div>
-        <div class="nav-links">
-            <a href="#about">Escritório</a>
-            <a href="#expertise">Domínios</a>
-            <a href="#contact">Privée</a>
-        </div>
-    </nav>
+    <header class="fixed top-0 left-0 w-full z-50 py-6">
+        <nav class="max-w-[1400px] mx-auto px-8 flex justify-between items-center">
+            <div class="logo font-bold text-2xl tracking-tighter">
+                VALENTE<span class="text-zinc-500 font-normal">.ADV</span>
+            </div>
+            <div class="flex gap-8 items-center text-sm font-medium tracking-wide">
+                <a href="#expertise" class="hover:text-zinc-400 transition-colors">Expertise</a>
+                <a href="#about" class="hover:text-zinc-400 transition-colors">O Escritório</a>
+                <a href="#contact" class="px-5 py-2 bg-zinc-100 text-zinc-950 rounded-full hover:bg-white transition-all transform active:scale-95">Consultoria</a>
+            </div>
+        </nav>
+    </header>
 
-    <main>
-        <!-- Hero: Cinematic & Elegant -->
-        <section class="hero">
-            <span class="hero-sub">Alta Complexidade & Discrição</span>
-            <h1 class="hero-title">Arquitetura Jurídica para <em>Legados Extraordinários.</em></h1>
-            <button class="hero-btn" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Agendar Consulta Privada</button>
-        </section>
-
-        <!-- About: The Silk Reveal -->
-        <section id="about" class="section container">
-            <div class="reveal-grid">
-                <div class="image-frame reveal">
-                    <div style="background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat; width: 100%; height: 100%; opacity: 0.8;"></div>
+    <main class="pt-32">
+        <!-- Hero: Asymmetric (Taste-Skill Rule 47) -->
+        <section class="max-w-[1400px] mx-auto px-8 min-h-[80dvh] flex flex-col justify-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
+                <div class="stagger-reveal">
+                    <span class="font-mono text-zinc-500 text-xs tracking-[0.3em] uppercase mb-4 block">São Paulo / Global</span>
+                    <h1 class="text-6xl md:text-8xl font-bold tracking-tighter leading-[0.9] mb-8">
+                        Estratégia <br> Jurídica de <br> <span class="text-zinc-500 italic">Alto Impacto.</span>
+                    </h1>
+                    <p class="text-lg text-zinc-400 max-w-[45ch] leading-relaxed">
+                        Proteção de ativos e resolução de crises complexas para organizações que exigem o absoluto em termos de técnica e discrição.
+                    </p>
                 </div>
-                <div class="reveal" style="grid-column: 8 / span 5;">
-                    <span class="hero-sub" style="letter-spacing: 0.3em; margin-bottom: 1rem;">O Manifesto</span>
-                    <h2 class="gallery-title" style="font-size: 3.5rem; line-height: 1.1;">A Excelência é um <em>Compromisso Inegociável.</em></h2>
-                    <p style="margin-top: 2rem;">No escritório Arthur Valente, não lidamos apenas com leis; cuidamos da estabilidade de impérios e da proteção de visões. Nossa abordagem é artesanal, dedicada a clientes que exigem o absoluto em termos de técnica e discrição.</p>
+                <div class="hidden lg:block relative stagger-reveal" style="transition-delay: 200ms;">
+                    <div class="aspect-[4/3] rounded-[2.5rem] bg-zinc-900 border border-zinc-800/50 overflow-hidden relative group">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-zinc-950/40 to-transparent z-10"></div>
+                        <img src="https://picsum.photos/seed/legal/800/600" alt="Office" class="w-full h-full object-cover grayscale opacity-50 group-hover:scale-105 transition-transform duration-1000">
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Expertise: Boutique Gallery -->
-        <section id="expertise" class="section container" style="border-top: 0.5px solid rgba(0,0,0,0.05);">
-            <div style="text-align: center; margin-bottom: 5rem;">
-                <span class="hero-sub">Áreas de Domínio</span>
-                <h2 class="gallery-title" style="font-size: 4rem;">Domínios de Atuação</h2>
+        <!-- Bento Grid 2.0 (Taste-Skill Section 5) -->
+        <section id="expertise" class="max-w-[1400px] mx-auto px-8 py-32">
+            <div class="mb-16">
+                <h2 class="text-4xl font-bold tracking-tighter">Áreas de Atuação</h2>
+                <p class="text-zinc-500 mt-2">Domínios de excelência e prática especializada.</p>
             </div>
-            
-            <div class="gallery-grid">
-                <div class="gallery-item reveal">
-                    <span class="gallery-icon">✧</span>
-                    <h3 class="gallery-title">Corporate</h3>
-                    <p class="gallery-desc">Estruturação de operações complexas e fusões estratégicas com visão global.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Bento Card 1: Wide (70% style) -->
+                <div class="md:col-span-2 group">
+                    <div class="h-[400px] bg-zinc-900 rounded-[2.5rem] border border-zinc-800/50 p-10 flex flex-col justify-between overflow-hidden relative reveal">
+                        <div class="flex justify-between items-start z-10">
+                            <span class="px-3 py-1 rounded-full border border-zinc-700 text-[10px] font-mono text-zinc-400">01 / CORPORATIVO</span>
+                            <div class="w-10 h-10 rounded-full border border-zinc-700 flex items-center justify-center group-hover:bg-white group-hover:text-zinc-950 transition-all duration-500">→</div>
+                        </div>
+                        <div class="z-10">
+                            <h3 class="text-3xl font-bold tracking-tighter mb-2">Arquitetura Societária</h3>
+                            <p class="text-zinc-500 max-w-sm">Fusões, aquisições e estruturação de operações cross-border de alta complexidade.</p>
+                        </div>
+                        <!-- Background Pattern -->
+                        <div class="absolute right-[-10%] bottom-[-10%] w-2/3 h-2/3 opacity-5 group-hover:opacity-10 transition-opacity">
+                            <svg viewBox="0 0 100 100" class="w-full h-full"><circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="0.5"/></svg>
+                        </div>
+                    </div>
                 </div>
-                <div class="gallery-item reveal">
-                    <span class="gallery-icon">✧</span>
-                    <h3 class="gallery-title">Wealth</h3>
-                    <p class="gallery-desc">Planejamento sucessório e proteção de ativos para famílias de alto patrimônio.</p>
+
+                <!-- Bento Card 2: Tall -->
+                <div class="group">
+                    <div class="h-[400px] bg-zinc-900 rounded-[2.5rem] border border-zinc-800/50 p-10 flex flex-col justify-between reveal">
+                        <span class="px-3 py-1 rounded-full border border-zinc-700 text-[10px] font-mono text-zinc-400 self-start">02 / WEALTH</span>
+                        <div>
+                            <h3 class="text-2xl font-bold tracking-tighter mb-4">Gestão Patrimonial</h3>
+                            <p class="text-zinc-500 text-sm">Planejamento sucessório e proteção de legados familiares globais.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="gallery-item reveal">
-                    <span class="gallery-icon">✧</span>
-                    <h3 class="gallery-title">Arbitration</h3>
-                    <p class="gallery-desc">Resolução de disputas em fóruns internacionais com rigor ético e técnico.</p>
+
+                <!-- Bento Card 3: Small -->
+                <div class="group">
+                    <div class="h-[300px] bg-zinc-900 rounded-[2.5rem] border border-zinc-800/50 p-10 flex flex-col justify-between reveal">
+                        <span class="px-3 py-1 rounded-full border border-zinc-700 text-[10px] font-mono text-zinc-400 self-start">03 / LITÍGIO</span>
+                        <h3 class="text-2xl font-bold tracking-tighter">Disputas <br>Estratégicas</h3>
+                    </div>
+                </div>
+
+                <!-- Bento Card 4: Wide 2 -->
+                <div class="md:col-span-2 group">
+                    <div class="h-[300px] bg-zinc-100 rounded-[2.5rem] p-10 flex flex-col justify-between reveal">
+                        <div class="flex justify-between items-start">
+                            <span class="px-3 py-1 rounded-full border border-zinc-300 text-[10px] font-mono text-zinc-500">04 / TECNOLOGIA</span>
+                            <span class="text-zinc-950 font-bold">PRO</span>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <h3 class="text-3xl font-bold tracking-tighter text-zinc-950">Propriedade <br>Intelectual</h3>
+                            <div class="w-12 h-12 bg-zinc-950 rounded-full flex items-center justify-center text-white">↗</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact: Obsidian Luxe -->
-        <section id="contact" class="contact-section">
-            <div class="container">
-                <h2 class="contact-title">Inicie uma Conversa <em>Reservada.</em></h2>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <input type="text" placeholder="Nome ou Organização" required>
-                        <input type="email" placeholder="Canal de Contato Seguro" required>
-                        <textarea placeholder="Breve resumo da demanda estratégica" rows="3" required></textarea>
-                        <button type="submit" class="hero-btn" style="border-color: #fff; color: #fff; margin-top: 2rem;">Enviar Solicitação</button>
+        <!-- Contact Section -->
+        <section id="contact" class="max-w-[1400px] mx-auto px-8 py-32 border-t border-zinc-900">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
+                <div>
+                    <h2 class="text-5xl font-bold tracking-tighter mb-8">Vamos <br>Conversar.</h2>
+                    <p class="text-zinc-500 mb-12">Entre em contato para uma consulta confidencial e análise estratégica preliminar.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 text-zinc-300">
+                            <span class="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center border border-zinc-800">@</span>
+                            contato@valente.adv.br
+                        </div>
+                        <div class="flex items-center gap-4 text-zinc-300">
+                            <span class="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center border border-zinc-800">T</span>
+                            +55 (11) 4004-9000
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-zinc-900 p-12 rounded-[2.5rem] border border-zinc-800/50 reveal">
+                    <form id="valenteForm" class="space-y-8">
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Nome Completo</label>
+                            <input type="text" placeholder="Arthur Valente" class="w-full bg-transparent border-b border-zinc-800 py-3 text-zinc-100 outline-none focus:border-zinc-100 transition-colors">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Email Corporativo</label>
+                            <input type="email" placeholder="arthur@valente.adv.br" class="w-full bg-transparent border-b border-zinc-800 py-3 text-zinc-100 outline-none focus:border-zinc-100 transition-colors">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Sua Mensagem</label>
+                            <textarea rows="3" placeholder="Como podemos auxiliar estrategicamente?" class="w-full bg-transparent border-b border-zinc-800 py-3 text-zinc-100 outline-none focus:border-zinc-100 transition-colors resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-5 bg-zinc-100 text-zinc-950 font-bold rounded-2xl hover:bg-white transition-all transform active:scale-[0.98]">
+                            ENVIAR SOLICITAÇÃO
+                        </button>
                     </form>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Arthur Valente — Escritório de Advocacia Boutique</p>
-            <p style="margin-top: 1rem; font-size: 0.6rem; opacity: 0.4;">São Paulo &bull; Londres &bull; Genebra</p>
+    <footer class="py-20 border-t border-zinc-900">
+        <div class="max-w-[1400px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-zinc-500 text-xs font-mono uppercase tracking-widest">
+                © 2024 VALENTE ADVOCACIA / OAB SP 123.456
+            </div>
+            <div class="flex gap-8 text-zinc-500 text-xs font-mono uppercase tracking-widest">
+                <a href="#" class="hover:text-zinc-100">Privacidade</a>
+                <a href="#" class="hover:text-zinc-100">Termos</a>
+            </div>
         </div>
     </footer>
 
